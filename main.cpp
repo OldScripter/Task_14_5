@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cassert>
 
 void enterMatrix(int matrix[][4], std::string tag)
 {
@@ -25,35 +24,30 @@ void readMatrix(int matrix[][4])
     }
 }
 
-bool checkIfEqual(int matrix_1[][4], int matrix_2[][4])
+bool transformToDiagonal(int matrix[][4])
 {
+    std::cout << "Transforming to diagonal matrix:\n";
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 4; j++)
         {
-            if (matrix_1[i][j] != matrix_2[i][j])
-                return false;
+            if (i != j)
+                matrix[i][j] = 0;
         }
     }
-    return true;
 }
-
-
 
 int main() {
 
-    int matrix_1[4][4];
-    enterMatrix(matrix_1, "1");
-    readMatrix(matrix_1);
-
-    int matrix_2[4][4];
-    enterMatrix(matrix_2, "2");
-    readMatrix(matrix_2);
+    int matrix[4][4];
+    enterMatrix(matrix, "for transformation");
+    readMatrix(matrix);
 
     //copy this line into terminal for fast check:
     //1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
 
-    std::cout << (checkIfEqual(matrix_1, matrix_2) ? "Matrices are equal\n" : "Matrices are not equal\n");
+    transformToDiagonal(matrix);
+    readMatrix(matrix);
 
     return 0;
 }
